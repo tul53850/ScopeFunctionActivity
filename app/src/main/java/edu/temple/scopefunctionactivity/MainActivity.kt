@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
         Log.d("avg less than med??", averageLessThanMedian(arr2).toString())
 
         //Log.d("function", getView(1, this, arr, this).toString())
-        val view = getView(1, null, arr, this@MainActivity).toString()
-        Log.d("getView", view)
+        val view = getView(1, null, arr, this@MainActivity) as TextView
+        Log.d("getView", view.text.toString())
 
 
     }
