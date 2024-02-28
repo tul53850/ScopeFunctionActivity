@@ -1,5 +1,6 @@
 package edu.temple.scopefunctionactivity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,16 @@ class MainActivity : AppCompatActivity() {
         // You can test your helper functions by  calling them from onCreate() and
         // printing their output to the Log, which is visible in the LogCat:
         // eg. Log.d("function output", getTestDataArray().toString())
+        val arr = getTestDataArray()
+        Log.d("output", arr.toString())
+
+        val arr2 = arr.map{it.toDouble()}
+        Log.d("avg less than med??", averageLessThanMedian(arr2).toString())
+
+        //Log.d("function", getView(1, this, arr, this).toString())
+        val view = getView(1, null, arr, this@MainActivity).toString()
+        Log.d("getView", view)
+
 
     }
 
@@ -58,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Create a view from an item in a collection, but recycle if possible (similar to an AdapterView's adapter)
-    private fun getView(position: Int, recycledView: View?, collection: List<Int>, context: Context): View {
+    /*private fun getView(position: Int, recycledView: View?, collection: List<Int>, context: Context): View {
         val textView: TextView
 
         if (recycledView != null) {
@@ -72,6 +83,12 @@ class MainActivity : AppCompatActivity() {
         textView.text = collection[position].toString()
 
         return textView
-    }
+    }*/
+
+    private fun getView(position: Int, recycledView: View?, collection: List<Int>, context: Context): View =
+        recycledView?.let { it as TextView } ?: TextView(context).apply {
+            setPadding(5, 10, 10, 0)
+            textSize = 22f
+        }.apply { text = collection[position].toString() }
 
 }
